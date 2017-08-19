@@ -1,0 +1,102 @@
+IDENTIFICATION DIVISION.                            
+PROGRAM-ID. P17AP03.                                
+DATA DIVISION.                                      
+WORKING-STORAGE SECTION.                            
+01  WS-CA             PIC X(01).                    
+01  WS-CHOICE         PIC 9(01) VALUE ZERO.         
+    88  VALID-CHOICE            VALUES 1 THRU 4.    
+01  WS-CHOICE-X  REDEFINES  WS-CHOICE               
+                      PIC X(01).                    
+01  WS-DATE-TIME      PIC S9(15) COMP-3 VALUE ZERO. 
+01  WS-MESSAGE        PIC X(30)  VALUE              
+    'END OF THE PROGRAM, BYE, BYE!!'.               
+    COPY PROG03.                                    
+    COPY DFHAID.                                    
+LINKAGE SECTION.                                    
+01  DFHCOMMAREA     PIC X(01).                      
+PROCEDURE DIVISION.             
+MAIN-PARA.                      
+    IF EIBCALEN = ZERO          
+        PERFORM FIRST-PARA      
+    ELSE                        
+        PERFORM NEXT-PARA.      
+END-PARA.                       
+    EXEC CICS RETURN            
+        TRANSID('PNNC')         
+        COMMAREA(WS-CA)         
+    END-EXEC.                   
+FIRST-PARA.                     
+    MOVE LOW-VALUES TO MENUMAPO 
+    PERFORM SEND-PARA.          
+SEND-PARA.                      
+    EXEC CICS SEND              
+        MAP('PAGE03')           
+        MAPSET('PAGE03')                          
+        FROM (MENUMAPO)                           
+        ERASE                                     
+    END-EXEC.                                     
+NEXT-PARA.                                        
+    EVALUATE EIBAID                               
+       WHEN DFHPF3                                
+          EXEC CICS SEND TEXT                     
+              FROM(WS-MESSAGE)                    
+              ERASE                               
+          END-EXEC                                
+          EXEC CICS RETURN                        
+          END-EXEC                                
+       WHEN DFHENTER                              
+          PERFORM PROCESS-PARA                    
+       WHEN OTHER                                 
+          MOVE 'INVALID KEY PRESSED' TO MESSAGEO  
+    END-EVALUATE                            
+    PERFORM SEND-PARA.                      
+PROCESS-PARA.                               
+    PERFORM RECEIVE-MAP.                    
+    MOVE CHOICEI TO WS-CHOICE-X             
+    IF VALID-CHOICE                         
+       PERFORM TRANSFER-PARA                
+    ELSE                                    
+       MOVE 'INVALID CHOICE' TO MESSAGEO    
+    END-IF.                                 
+TRANSFER-PARA.                              
+    EVALUATE WS-CHOICE                      
+       WHEN 1                               
+          EXEC CICS XCTL                    
+               PROGRAM('PAGE3.1')           
+          END-EXEC                          
+       WHEN 2                               
+          EXEC CICS XCTL                         
+               PROGRAM('PAGE3.2')                
+          END-EXEC                               
+       WHEN 3                                    
+          EXEC CICS XCTL                         
+               PROGRAM('PAGE3.3')                
+          END-EXEC                               
+       WHEN 4                                    
+          EXEC CICS XCTL                         
+               PROGRAM('PAGE3.4')                
+          END-EXEC                               
+       WHEN 5                                    
+          EXEC CICS XCTL                         
+               PROGRAM('PAGE3.5')                
+          END-EXEC                               
+       WHEN OTHER                                
+          MOVE 'INVALID KEY ENTERED' TO MESSAGEO 
+    END-EVALUATE.                
+RECEIVE-MAP.                     
+    EXEC CICS RECEIVE            
+        MAP('MENUMAP')           
+        MAPSET('PAGE03')         
+        INTO(MENUMAPI)           
+    END-EXEC.                    
+DATE-TIME-PARA.                  
+    EXEC CICS ASKTIME            
+         ABSTIME(WS-DATE-TIME)   
+    END-EXEC.                    
+    EXEC CICS FORMATTIME         
+         ABSTIME(WS-DATE-TIME)   
+         DDMMYYYY(SYSDATEO)      
+         DATESEP                 
+         TIME(SYSTIMEO)          
+         TIMESEP                 
+    END-EXEC.

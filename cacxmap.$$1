@@ -1,0 +1,8 @@
+P4	 DFHMSD TYPE=&SYSPARM
+P4	 DFHMDI SIZE=(24,80)
+HELLO	 DFHMDF ATTRB=(UNPROT,BRT,IC,FSET),			       C
+               INITIAL='HELLO',                                        C
+	       LENGTH=5,					       C
+	       POS=(1,1)
+	 DFHMSD TYPE=FINAL
+	 END

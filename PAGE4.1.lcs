@@ -1,0 +1,133 @@
+CA-Realia for CICS Ver:6.1.0002C:\Users\s5\PROJECT WORK\PAGE4.1.BMS
+
+    1 PAGE41   DFHMSD TYPE=&SYSPARM,                                         C
+    2                CTRL=(FREEKB),                                          C
+    3                LANG=COBOL,                                             C
+    4                MODE=INOUT,                                             C
+    5                STORAGE=AUTO,                                           C
+    6                TIOAPFX=YES
+    7 PAGE41   DFHMDI SIZE=(24,80)
+    8          DFHMDF ATTRB=(PROT,BRT),                                      C
+    9                INITIAL='SHARE MARKET',                                 C
+   10                LENGTH=12,                                              C
+   11                POS=(1,25)
+   12          DFHMDF ATTRB=(PROT,BRT),                                      C
+   13                INITIAL='DATE :',                                       C
+   14                LENGTH=6,                                               C
+   15                POS=(1,60)
+   16 DATE41   DFHMDF ATTRB=(PROT,BRT),                                      C
+   17                INITIAL='DD/MM/CCYY',                                   C
+   18                LENGTH=10,                                              C
+   19                POS=(1,67)
+   20          DFHMDF ATTRB=(PROT,BRT),                                      C
+   21                INITIAL='TIME :',                                       C
+   22                LENGTH=6,                                               C
+   23                POS=(2,60)
+   24 TIME41   DFHMDF ATTRB=(PROT,BRT),                                      C
+   25                INITIAL='HH:MM:SS',                                     C
+   26                LENGTH=8,                                               C
+   27                POS=(2,67)
+   28          DFHMDF ATTRB=(PROT,BRT),                                      C
+   29                INITIAL='ENTITY ID          :',                         C
+   30                LENGTH=20,                                              C
+   31                POS=(5,10)
+   32 ID       DFHMDF ATTRB=(PROT,BRT),                                      C
+   33                INITIAL='_____',                                        C
+   34                LENGTH=5,                                               C
+   35                POS=(5,32)
+   36          DFHMDF ATTRB=(PROT,BRT),                                      C
+   37                INITIAL='ENTITY NAME        :',                         C
+   38                LENGTH=20,                                              C
+   39                POS=(7,10)
+   40 NAME     DFHMDF ATTRB=(UNPROT,BRT,IC,FSET),                            C
+   41                INITIAL='________',                                     C
+   42                LENGTH=8,                                               C
+   43                POS=(7,32)
+   44          DFHMDF ATTRB=(ASKIP,BRT),                                     C
+   45                LENGTH=1,                                               C
+   46                POS=(7,41)
+   47          DFHMDF ATTRB=(PROT,BRT),                                      C
+   48                INITIAL='ENTITY DOB         :',                         C
+   49                LENGTH=20,                                              C
+   50                POS=(9,10)
+   51 DOB      DFHMDF ATTRB=(UNPROT,BRT,FSET),                               C
+   52                INITIAL='DD/MM/CCYY',                                   C
+   53                LENGTH=10,                                              C
+   54                POS=(9,32)
+   55          DFHMDF ATTRB=(ASKIP,BRT),                                     C
+   56                LENGTH=1,                                               C
+   57                POS=(9,43)
+   58          DFHMDF ATTRB=(PROT,BRT),                                      CCA-Realia for CICS Ver:6.1.0002C:\Users\s5\PROJECT WORK\PAGE4.1.BMS
+
+   59                INITIAL='ENTITY E-MAIL ID   :',                         C
+   60                LENGTH=20,                                              C
+   61                POS=(11,10)
+   62 EMAIL    DFHMDF ATTRB=(UNPROT,BRT,FSET),                               C
+   63                INITIAL='______________________________',               C
+   64                LENGTH=30,                                              C
+   65                POS=(11,32)
+   66          DFHMDF ATTRB=(ASKIP,BRT),                                     C
+   67                LENGTH=1,                                               C
+   68                POS=(11,63)
+   69          DFHMDF ATTRB=(PROT,BRT),                                      C
+   70                INITIAL='ENTITY ADDRESS     :',                         C
+   71                LENGTH=20,                                              C
+   72                POS=(13,10)
+   73 ADDR     DFHMDF ATTRB=(UNPROT,BRT,FSET),                               C
+   74                INITIAL='______________________________',               C
+   75                LENGTH=30,                                              C
+   76                POS=(13,32)
+   77          DFHMDF ATTRB=(ASKIP,BRT),                                     C
+   78                LENGTH=1,                                               C
+   79                POS=(13,63)
+   80          DFHMDF ATTRB=(PROT,BRT),                                      C
+   81                INITIAL='ENTITY PIN-CODE    :',                         C
+   82                LENGTH=20,                                              C
+   83                POS=(15,10)
+   84 PIN      DFHMDF ATTRB=(UNPROT,BRT,FSET),                               C
+   85                INITIAL='________',                                     C
+   86                LENGTH=8,                                               C
+   87                POS=(15,32)
+   88          DFHMDF ATTRB=(ASKIP,BRT),                                     C
+   89                LENGTH=1,                                               C
+   90                POS=(15,41)
+   91          DFHMDF ATTRB=(PROT,BRT,FSET),                                 C
+   92                INITIAL='MESSAGE :',                                    C
+   93                LENGTH=9,                                               C
+   94                POS=(22,1)
+   95 MSG41    DFHMDF ATTRB=(PROT,BRT),                                      C
+   96                COLOR=RED,                                              C
+   97                HILIGHT=BLINK,                                          C
+   98                INITIAL='_______________________________________________C
+   99                ___',                                                   C
+  100                LENGTH=50,                                              C
+  101                POS=(22,12)
+  102          DFHMDF ATTRB=(PROT,BRT),                                      C
+  103                INITIAL='ENTER = PROCESS',                              C
+  104                LENGTH=15,                                              C
+  105                POS=(24,1)
+  106          DFHMDF ATTRB=(PROT,BRT),                                      C
+  107                INITIAL='PF3 = BACK',                                   C
+  108                LENGTH=10,                                              C
+  109                POS=(24,19)
+  110          DFHMDF ATTRB=(PROT,BRT),                                      C
+  111                INITIAL='PF7 = UP',                                     C
+  112                LENGTH=8,                                               C
+  113                POS=(24,32)
+  114          DFHMDF ATTRB=(PROT,BRT),                                      C
+  115                INITIAL='PF8 = DOWN',                                   C
+  116                LENGTH=10,                                              CCA-Realia for CICS Ver:6.1.0002C:\Users\s5\PROJECT WORK\PAGE4.1.BMS
+
+  117                POS=(24,43)
+  118 DUMMY41  DFHMDF ATTRB=(PROT,BRT),                                      C
+  119                LENGTH=1,                                               C
+  120                POS=(24,79)
+  121          DFHMSD TYPE=FINAL
+      PAGE4.1 loaded with 1 MAPS, 29 FIELDS and 355 Bytes of Literals
+
+  122          ENDCA-Realia for CICS Ver:6.1.0002C:\Users\s5\PROJECT WORK\PAGE4.1.BMS
+
+      COBOL COPY file generated
+
+      Mapset generated. Object size is 1,186.
+
